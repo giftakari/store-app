@@ -5,8 +5,10 @@ import Header from "./components/Header"
 import M from "materialize-css"
 import Product from "./components/Product"
 import Loading from "./components/Loading"
+import FilterProducts from "./components/FilterProducts"
 
 function App() {
+  // Initialize material css
   M.AutoInit()
 
   const [products, setProducts] = useState([])
@@ -15,6 +17,21 @@ function App() {
   const removeItem = (id) => {
     console.log(id)
     setProducts(products.filter((product) => product.id != id))
+  }
+
+  const filterMenOnly = () => {
+    console.log("click")
+
+    const menProducts = [...products.filter((product) => product.category === "men's clothing")]
+    setProducts(menProducts)
+  }
+
+  const filterWomenOnly = () => {
+    const womenProducts = [...products.filter((product) => product.category === "women's clothing")]
+    setProducts(womenProducts)
+  }
+  const allProducts = () => {
+    return setProducts(products)
   }
 
   useEffect(() => {
@@ -33,9 +50,9 @@ function App() {
   return (
     <div>
       <Header />
-
-      <div className="container">
-        <div className="row">{loading ? <Loading /> : products.map((product) => <Product product={product} key={product.id} removeItem={removeItem} />)}</div>
+      <div className="container" style={{ marginTop: "2rem" }}>
+        <FilterProducts filterMenOnly={filterMenOnly} filterWomenOnly={filterWomenOnly} allProducts={allProducts} />
+        <div className="row">{loading ? <Loading /> : products.map((product) => <Product product={product} key={product.id} removeItem={removeItem} filterMenOnly={filterMenOnly} filterWomenOnly={filterWomenOnly} />)}</div>
       </div>
     </div>
   )
