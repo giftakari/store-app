@@ -15,10 +15,18 @@ function Product({ product, removeItem }) {
         <div className="card-content">
           <p>{product.description.slice(0, 40)}</p>
         </div>
+        <div className="card-content">
+          <h6 className="waves-effect card-title" style={{color:"fff"}}>${product.price}</h6>
+        </div>
         <div className="card-action">
-          <a href="#" onClick={() => removeItem(product.id)} className="waves-effect red lighten-2
- btn">Remove
-          <i class="material-icons left">delete</i>
+          <a
+            href="#"
+            onClick={() => removeItem(product.id)}
+            className="waves-effect red lighten-2
+ btn"
+          >
+            Remove
+            <i className="material-icons left">delete</i>
           </a>
         </div>
       </div>
