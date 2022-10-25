@@ -8,7 +8,6 @@ import Loading from "./components/Loading";
 import Category from "./components/Category";
 
 const CATEGORIES = [
-  { category: "all products", icon: "menu" },
   { category: "electronics", icon: "devices" },
   { category: "jewelery", icon: "diamond" },
   { category: "men's clothing", icon: "man" },
@@ -23,22 +22,20 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all products");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   function removeItem(id) {
     setFilteredProducts(filteredProducts.filter((product) => product.id !== id));
   }
   function clearFilters() {
-    setSelectedCategory("all products");
+    setSelectedCategory("");
     setSearch("");
   }
 
   useEffect(() => {
     setFilteredProducts(
       products
-        .filter(
-          (product) => product.category === selectedCategory || selectedCategory === "all products"
-        )
+        .filter((product) => product.category === selectedCategory || selectedCategory === "")
         .filter((product) => product.title.match(RegExp(search, "i")))
     );
   }, [selectedCategory, search, products]);
