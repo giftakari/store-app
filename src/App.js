@@ -18,9 +18,13 @@ function App() {
   const [categories, setCatagories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all products");
 
-  const removeItem = (id) => {
+  function removeItem(id) {
     setFilteredProducts(filteredProducts.filter((product) => product.id !== id));
-  };
+  }
+  function clearsFilters() {
+    setSelectedCategory("all products");
+    setSearch("");
+  }
 
   useEffect(() => {
     setFilteredProducts(
@@ -70,6 +74,15 @@ function App() {
           />
           <label htmlFor="search">Search</label>
         </div>
+
+        <button
+          className="waves-effect waves-light lighten-2 red btn"
+          style={{ marginBottom: "2rem" }}
+          onClick={clearsFilters}
+        >
+          <i className="material-icons left">close</i>
+          Clear
+        </button>
 
         <div className="row">
           {loading ? (
