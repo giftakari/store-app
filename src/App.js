@@ -13,26 +13,40 @@ function App() {
 
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
+  // Pass  the value of products to filtered products
+  // Better way to reduce fetching data from the server multiple times
+
   const [filteredProducts, setFilteredProducts] = useState([])
 
   const removeItem = (id) => {
     console.log(id)
-    setFilteredProducts(products.filter((product) => product.id != id));
+    setFilteredProducts(products.filter((product) => product.id != id))
   }
 
   const filterMenOnly = () => {
     console.log("click")
 
     const menProducts = [...products.filter((product) => product.category === "men's clothing")]
-    setFilteredProducts(menProducts);
+    setFilteredProducts(menProducts)
   }
 
   const filterWomenOnly = () => {
     const womenProducts = [...products.filter((product) => product.category === "women's clothing")]
-    setFilteredProducts(womenProducts);
+    setFilteredProducts(womenProducts)
   }
+
+  const filterElectronics = () => {
+    const electronicProducts = [...products.filter((product) => product.category === "electronics")]
+    setFilteredProducts(electronicProducts)
+  }
+
+  const filterJeweleries = () => {
+    const jeweleriesProducts = [...products.filter((product) => product.category === "jewelery")]
+    setFilteredProducts(jeweleriesProducts)
+  }
+
   const allProducts = () => {
-    return setFilteredProducts(products);
+    return setFilteredProducts(products)
   }
 
   useEffect(() => {
@@ -53,7 +67,12 @@ function App() {
     <div>
       <Header />
       <div className="container" style={{ marginTop: "2rem" }}>
-        <FilterProducts filterMenOnly={filterMenOnly} filterWomenOnly={filterWomenOnly} allProducts={allProducts} />
+        {/* Component to filter the items on render */}
+        <FilterProducts filterMenOnly={filterMenOnly} filterWomenOnly={filterWomenOnly} allProducts={allProducts} filterElectronics={filterElectronics} filterJeweleries={filterJeweleries} />
+
+        {/*** if Loading  render loading componnent else render
+         * render the products
+         */}
         <div className="row">{loading ? <Loading /> : filteredProducts.map((product) => <Product product={product} key={product.id} removeItem={removeItem} filterMenOnly={filterMenOnly} filterWomenOnly={filterWomenOnly} />)}</div>
       </div>
     </div>
