@@ -7,6 +7,14 @@ import Product from "./components/Product";
 import Loading from "./components/Loading";
 import Category from "./components/Category";
 
+const CATEGORIES = [
+  { category: "all products", icon: "menu" },
+  { category: "electronics", icon: "devices" },
+  { category: "jewelery", icon: "diamond" },
+  { category: "men's clothing", icon: "man" },
+  { category: "women's clothing", icon: "woman" },
+];
+
 function App() {
   // Initialize material css
   M.AutoInit();
@@ -15,7 +23,6 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [search, setSearch] = useState("");
-  const [categories, setCatagories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all products");
 
   function removeItem(id) {
@@ -42,7 +49,6 @@ function App() {
       .then((data) => {
         setProducts(data);
         setLoading(false);
-        setCatagories(() => ["all products", ...new Set(data.map(({ category }) => category))]);
       })
       .catch((err) => {
         console.log(err);
@@ -55,10 +61,11 @@ function App() {
       <Header />
       <div className="container" style={{ marginTop: "2rem" }}>
         <div style={{ margin: "2rem 0" }} className="container">
-          {categories.map((category) => (
+          {CATEGORIES.map(({ category, icon }) => (
             <Category
               key={category}
               category={category}
+              icon={icon}
               isSelected={selectedCategory === category}
               handleSelect={() => setSelectedCategory(category)}
             />
