@@ -57,7 +57,16 @@ function App() {
     <div>
       <Header />
       <div className="container" style={{ marginTop: "2rem" }}>
-        <div style={{ margin: "2rem 0" }} className="container">
+        <div
+          style={{
+            margin: "2rem 0",
+            display: "grid",
+            gap: "1rem",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            width: "100%",
+          }}
+          className="container"
+        >
           {CATEGORIES.map(({ category, icon }) => (
             <Category
               key={category}
@@ -69,6 +78,15 @@ function App() {
           ))}
         </div>
 
+        <button
+          className="waves-effect waves-light lighten-2 red btn"
+          style={{ marginBottom: "2rem" }}
+          onClick={clearFilters}
+        >
+          <i className="material-icons left">close</i>
+          Clear
+        </button>
+
         <div className="input-field">
           <input
             id="search"
@@ -78,15 +96,6 @@ function App() {
           />
           <label htmlFor="search">Search</label>
         </div>
-
-        <button
-          className="waves-effect waves-light lighten-2 red btn"
-          style={{ marginBottom: "2rem" }}
-          onClick={clearFilters}
-        >
-          <i className="material-icons left">close</i>
-          Clear
-        </button>
 
         <div className="row">
           {loading ? (
