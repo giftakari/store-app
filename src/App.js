@@ -20,7 +20,7 @@ function App() {
 
   const removeItem = (id) => {
     console.log(id)
-    setFilteredProducts(products.filter((product) => product.id != id))
+    setFilteredProducts(filteredProducts.filter((product) => product.id != id))
   }
 
   const filterMenOnly = () => {
