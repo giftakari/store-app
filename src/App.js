@@ -21,7 +21,7 @@ function App() {
   function removeItem(id) {
     setFilteredProducts(filteredProducts.filter((product) => product.id !== id));
   }
-  function clearsFilters() {
+  function clearFilters() {
     setSelectedCategory("all products");
     setSearch("");
   }
@@ -78,7 +78,7 @@ function App() {
         <button
           className="waves-effect waves-light lighten-2 red btn"
           style={{ marginBottom: "2rem" }}
-          onClick={clearsFilters}
+          onClick={clearFilters}
         >
           <i className="material-icons left">close</i>
           Clear
